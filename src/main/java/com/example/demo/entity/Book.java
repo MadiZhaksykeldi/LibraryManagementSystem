@@ -11,12 +11,14 @@ public class Book {
     private String title;
     private String author;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-    private List<Genre> genres;
+    @ManyToMany(mappedBy = "booksgenre", fetch = FetchType.LAZY)
+    private List<Genre> genreList;
     @Enumerated(EnumType.STRING)
     private BookTransactionStatus bookTransactionStatus;
     @ManyToMany(mappedBy = "bList", fetch = FetchType.LAZY)
     private List<LibraryMember> libraryMemberList;
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
+    private List<BookCollection> bookCollections;
 
     public Long getId() {
         return Id;
@@ -42,12 +44,20 @@ public class Book {
         this.author = author;
     }
 
-    public List<Genre> getGenres() {
-        return genres;
+    public List<Genre> getGenreList() {
+        return genreList;
     }
 
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
+    public void setGenreList(List<Genre> genreList) {
+        this.genreList = genreList;
+    }
+
+    public List<BookCollection> getBookCollections() {
+        return bookCollections;
+    }
+
+    public void setBookCollections(List<BookCollection> bookCollections) {
+        this.bookCollections = bookCollections;
     }
 
     public BookTransactionStatus getBookTransactionStatus() {
@@ -72,9 +82,10 @@ public class Book {
                 "Id=" + Id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", genres=" + genres +
+                ", genreList=" + genreList +
                 ", bookTransactionStatus=" + bookTransactionStatus +
                 ", libraryMemberList=" + libraryMemberList +
+                ", bookCollections=" + bookCollections +
                 '}';
     }
 }

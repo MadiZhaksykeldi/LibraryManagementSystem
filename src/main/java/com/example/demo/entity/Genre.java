@@ -1,8 +1,7 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Book;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Genre {
@@ -11,12 +10,21 @@ public class Genre {
     private Long Id;
     private String type;
 
-    @Column(name = "bId")
-    private Long bId;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "book_genres",
+            joinColumns = {@JoinColumn(name = "gId", referencedColumnName = "Id")},
+            inverseJoinColumns = {@JoinColumn(name = "bId", referencedColumnName = "Id")}
+    )
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bId", insertable = false, updatable = false)
-    private Book book;
+    private List<Book> bList;
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
 
     public String getType() {
         return type;
@@ -26,28 +34,12 @@ public class Genre {
         this.type = type;
     }
 
-    public java.lang.Long getbId() {
-        return bId;
-    }
-
-    public void setbId(java.lang.Long bId) {
-        this.bId = bId;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
     @Override
     public String toString() {
         return "Genre{" +
-                "type='" + type + '\'' +
-                ", bId=" + bId +
-                ", book=" + book +
+                "Id=" + Id +
+                ", type='" + type + '\'' +
+                ", bList=" + bList +
                 '}';
     }
 }

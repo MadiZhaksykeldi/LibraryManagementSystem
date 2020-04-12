@@ -1,45 +1,53 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Book;
-import com.example.demo.entity.BookTransactionStatus;
-import com.example.demo.entity.LibraryMember;
+import com.example.demo.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Scanner;
 
+
+@RestController
+@RequestMapping("/books")
 public class BookController {
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    private BookRepository bookRepository;
 
-    public String request() {
-        System.out.println("Enter book title to request: ");
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
+    @GetMapping("")
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 
-    public void borrowBook(Long cId, Long bId) {
-        LibraryMember member = entityManager.find(LibraryMember.class, cId);
-        Book book = entityManager.find(Book.class, bId);
-        if (book.getBookTransactionStatus().equals("RETURNED")) {
-            book.setBookTransactionStatus(BookTransactionStatus.ISSUED);
-        } else {
-            System.out.println("Book is currently not available!");
-        }
+    @GetMapping("/{Id}")
+    public Book getBookById(@PathVariable("Id") Long Id) {
+        return bookRepository.findById(Id).get();
     }
 
-    public void showDetails(List<?> entities, String message) {
-        System.out.println("-----" + message + "-----");
-        for (Object entity : entities) {
-            System.out.println(entity);
-        }
-        System.out.println("-------------------------");
+    @GetMapping("/find_title/")
+    public List<Book> getBookByTitle(@RequestParam String title) {
+        return bookRepository.findByTitle(title);
     }
 
-   /* public void clear(Long bId){
-        for(entityManager.find(Book.class, bId)){
+    @GetMapping("/find_author/")
+    public List<Book> getBookByAuthor(@RequestParam String author) {
+        return bookRepository.findByAuthor(author);
+    }
 
-        }
-    }*/
+    @PostMapping("")
+    public Book createBook(@RequestBody Book book) {
+        return bookRepository.saveAndFlush(book);
+    }
+
+    @DeleteMapping("/{Id}")
+    public Book deleteBook(@PathVariable("Id") Long Id) {
+        bookRepository.deleteById(Id);
+        return bookRepository.saveAndFlush(bookRepository.findById(Id).get());
+    }
+
+    @PutMapping("/{Id}")
+    public Book updateBook(@PathVariable Long Id, @RequestBody Book book) {
+        book.setId(Id);
+        return bookRepository.saveAndFlush(book);
+    }
 }

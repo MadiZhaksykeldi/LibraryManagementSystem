@@ -1,12 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.LibraryMember;
+import com.example.demo.entity.BookCollection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface LibraryMemberRepository extends JpaRepository<LibraryMember, Long> {
-    List<LibraryMember> findAllByName(String name);
+public interface CollectionRepository extends JpaRepository<BookCollection, Long> {
+    List<BookCollection> findByAuthor(String author);
 }
