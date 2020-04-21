@@ -39,7 +39,6 @@ public class CollectionController {
         return collectionRepository.saveAndFlush(collectionRepository.findById(Id).get());
     }
 
-
     @PutMapping("/{Id}")
     public BookCollection updateCollection(@PathVariable Long Id, @RequestBody BookCollection bookCollection) {
         bookCollection.setId(Id);

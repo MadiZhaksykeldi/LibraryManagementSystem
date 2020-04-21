@@ -1,7 +1,6 @@
 package com.example.demo;
 
 
-import com.example.demo.config.SpringConfiguration;
 import com.example.demo.controller.BookController;
 import com.example.demo.controller.MemberController;
 import com.example.demo.entity.Book;

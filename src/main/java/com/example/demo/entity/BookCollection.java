@@ -22,6 +22,10 @@ public class BookCollection {
         return Id;
     }
 
+    public void setId(Long Id) {
+        this.Id = Id;
+    }
+
     public String getAuthor() {
         return author;
     }
