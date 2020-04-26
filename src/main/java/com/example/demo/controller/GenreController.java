@@ -2,11 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Genre;
 import com.example.demo.repository.GenreRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(value = "Genre Controller")
 @RestController
 @RequestMapping("/genres")
 public class GenreController {
@@ -42,7 +44,7 @@ public class GenreController {
 
     @PutMapping("/{Id}")
     public Genre updateGenre(@PathVariable Long Id, @RequestBody Genre genre) {
-        genre.setId(Id);
+        //   genre.setId(Id);
         return genreRepository.saveAndFlush(genre);
     }
 

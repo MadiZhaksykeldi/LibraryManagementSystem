@@ -4,10 +4,11 @@ import com.example.demo.entity.Book;
 import com.example.demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
 
 import java.util.List;
 
-
+@Api(value = "Book Controller")
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -47,7 +48,7 @@ public class BookController {
 
     @PutMapping("/{Id}")
     public Book updateBook(@PathVariable Long Id, @RequestBody Book book) {
-        book.setId(Id);
+        // book.setId(Id);
         return bookRepository.saveAndFlush(book);
     }
 }

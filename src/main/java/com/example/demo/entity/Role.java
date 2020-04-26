@@ -1,11 +1,18 @@
 package com.example.demo.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Role implements GrantedAuthority {
 
@@ -13,22 +20,6 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long Id) {
-        this.Id = Id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public String toString() {

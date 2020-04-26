@@ -1,8 +1,15 @@
 package com.example.demo.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Genre {
     @Id
@@ -17,22 +24,6 @@ public class Genre {
     )
 
     private List<Book> bList;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     @Override
     public String toString() {

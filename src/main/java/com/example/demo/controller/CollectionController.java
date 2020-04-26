@@ -2,11 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.BookCollection;
 import com.example.demo.repository.CollectionRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(value = "Collection Controller")
 @RestController
 @RequestMapping("/collections")
 public class CollectionController {
@@ -34,14 +36,14 @@ public class CollectionController {
     }
 
     @DeleteMapping("/{Id}")
-    public BookCollection deleteCollection (@PathVariable("Id") Long Id) {
+    public BookCollection deleteCollection(@PathVariable("Id") Long Id) {
         collectionRepository.deleteById(Id);
         return collectionRepository.saveAndFlush(collectionRepository.findById(Id).get());
     }
 
     @PutMapping("/{Id}")
     public BookCollection updateCollection(@PathVariable Long Id, @RequestBody BookCollection bookCollection) {
-        bookCollection.setId(Id);
+        //  bookCollection.setId(Id);
         return collectionRepository.saveAndFlush(bookCollection);
     }
 }

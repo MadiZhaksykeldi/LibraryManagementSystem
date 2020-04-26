@@ -1,10 +1,15 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Book;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class LibraryMember {
     @Id
@@ -16,30 +21,6 @@ public class LibraryMember {
     @JoinTable(name = "member_books", joinColumns = {@JoinColumn(name = "mId", referencedColumnName = "Id")}, inverseJoinColumns = {@JoinColumn(name = "bId", referencedColumnName = "Id")}
     )
     private List<Book> bList;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Book> getbList() {
-        return bList;
-    }
-
-    public void setbList(List<Book> bList) {
-        this.bList = bList;
-    }
 
     @Override
     public String toString() {

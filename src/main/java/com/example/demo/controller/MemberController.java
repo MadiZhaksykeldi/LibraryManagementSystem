@@ -2,12 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.LibraryMember;
 import com.example.demo.repository.LibraryMemberRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Api(value = "Member Controller")
 @RestController
 @RequestMapping("/members")
 public class MemberController {
@@ -43,7 +44,7 @@ public class MemberController {
 
     @PutMapping("/{Id}")
     public LibraryMember updateMember(@PathVariable Long Id, @RequestBody LibraryMember member) {
-        member.setId(Id);
+        // member.setId(Id);
         return memberRepository.saveAndFlush(member);
     }
 }
